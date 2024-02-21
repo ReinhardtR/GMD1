@@ -131,6 +131,13 @@ The player will be equipped with a jetpack to easily move around in the mine.
 
 The players mobility will be affected by the weight of their inventory.
 
+***Resources***
+A system that spawns resources in the ground.
+
+A system that allows the player to vaccum resources to transport them back to the base.
+
+A system that allows the player to deposit resources in the base.
+
 ***Mining***
 A mining system that allows the player to mine for resources in the ground.
 
@@ -195,3 +202,11 @@ The player will feel a sense of fear when they are defending the base from the w
 - Learning the best ways to strategize and manage time.
 
 ******
+
+## Project Miletones
+
+**1. Movement and Mining System**
+**2. Base and Enemies System**
+**3. Upgrades System**
+
+*****
