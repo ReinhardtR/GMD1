@@ -164,6 +164,13 @@ The *Secondary* button will **vaccum resources**, when not controlling the base 
 ***Jump***
 The *Jump* button will make the player **fly with a jetpack**, when not controlling the base or in a menu.
 
+***Joystick***
+The *Joystick* will **move the player**, when not controlling the base or in a menu.
+
+The *Joystick* will **move the base weapons**, when controlling the base.
+
+The *Joystick* will **navigate the menus**, when in the menus.
+
 #### Emotions
 
 The player will feel a sense of accomplishment when they survive longer and longer.
