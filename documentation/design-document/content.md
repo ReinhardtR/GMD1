@@ -19,7 +19,7 @@ The concept of the game is inspired by other Roguelike & Tower Defense games, li
 
 [***Dome Keeper***](https://store.steampowered.com/app/1637320/Dome_Keeper/)
 
-![Dome Keeper](dome-keeper.png)
+![Dome Keeper](images/dome-keeper.png)
 
 *The following concepts are inspired by Dome Keeper*
 
@@ -31,7 +31,7 @@ The concept of the game is inspired by other Roguelike & Tower Defense games, li
 
 [***Wall World***](https://store.steampowered.com/app/2187290/Wall_World/)
 
-![Wall World](wall-world.png)
+![Wall World](images/wall-world.png)
 
 *The following concepts are inspired by Wall World*
 - Mining with the use of lasers.
@@ -71,7 +71,7 @@ They will learn the best ways to mine for resources and the timing needed to get
 
 The game will have a retro pixel style art, but with modern lighting and effects. Similar to that of Dome Keeper.
 
-![Dome Keeper Art Style](dome-keeper-art.png)
+![Dome Keeper Art Style](images/dome-keeper-art.png)
 
 ### Game World
 
@@ -93,7 +93,7 @@ The game will be a one-time purchase on various platforms.
 
 Underneath is an illustration of the core loop of the game.
 
-![Core Loop](core-loop.png)
+![Core Loop](images/core-loop.png)
 
 The players goal is to survive the longest, and to do this, will have to optimize each part of the loop. While also strategizing and managing time.
 
@@ -107,7 +107,7 @@ After defending the base from the first wave they will have a chance to go minin
 
 Depending on their confidence from their first wave, they might choose to mine for resources for a longer time, or to get back to the base quicker. They might prioritize mining gear over weapons or shields, or vice versa.
 
-![Concept Art](concept-art.png)
+![Concept Art](images/concept-art.png)
 
 ### Game Systems
 
@@ -145,11 +145,11 @@ A system that allows the player to upgrade their weapons, shields and mining gea
 #### UI
 
 ***Upgrades Menu***
-![UI Concept](concept-ui.png)
+![UI Concept](images/concept-ui.png)
 
 #### Controls
 
-![Controls](controls.png)
+![Controls](images/controls.png)
 
 ***Primary***
 The *Primary* button will **shoot mining lasers**, when not controlling the base or in a menu.
