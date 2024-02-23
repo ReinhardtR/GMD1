@@ -6,7 +6,7 @@
 
 ### Pitch
 
-Dome Defender is a Roguelike & Tower Defense game, where you need to quickly mine for resources, inbetween waves of enemies, to upgrade your equipment and survive.
+Dome Defender is a Roguelike Tower Defense game, where you need to quickly mine for resources, inbetween waves of enemies, to upgrade your equipment and survive.
 
 ### Genres
 
