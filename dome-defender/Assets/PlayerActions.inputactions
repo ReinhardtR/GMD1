@@ -7,12 +7,12 @@
             "actions": [
                 {
                     "name": "Primary",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "4349c011-cdfe-4ecb-b62c-fabeb34b4765",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Secondary",
@@ -28,6 +28,15 @@
                     "type": "Value",
                     "id": "e5385009-8b9e-4610-a1b0-110ddc2f6d93",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "e9d452e6-d64d-46d5-a865-ae7c1e5a1c0a",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -110,6 +119,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "37738943-0c4d-49e5-bf0c-fafa754fa0c3",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

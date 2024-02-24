@@ -4,33 +4,36 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 5.0f;
+    private float speed = 5.0f;
+    [SerializeField]
+    private Transform drill;
 
-    private Rigidbody2D _rigidbody;
-    private Transform _drill;
+    private Rigidbody2D rb;
 
-    private Vector3 _movement;
-    private Vector2 _direction;
+    private Vector3 movement;
 
     void Start() {
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _drill = transform.Find("Drill");
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void FixedUpdate() {
-        Vector3 delta = _speed * Time.fixedDeltaTime * _movement;
-        _rigidbody.MovePosition(transform.position + delta);
-
-        if (!_direction.Equals(Vector2.zero)) { 
-            float radian = Mathf.Atan2(_direction.y, _direction.x);
-            float degree = radian * Mathf.Rad2Deg;
-            float z = degree - 90;
-            _drill.rotation = Quaternion.Euler(0, 0, z);
-        }
+        MovePlayer();
+        RotateDrill();
     }
 
     public void OnMovement(InputValue value) {
-        _movement = value.Get<Vector2>();
-        _direction = _movement.normalized;
+        movement = value.Get<Vector2>();
+    }
+
+    private void MovePlayer() {
+        Vector3 delta = speed * Time.fixedDeltaTime * movement;
+        rb.MovePosition(transform.position + delta);
+    }
+
+    private void RotateDrill() {
+        if (movement == Vector3.zero) return;
+        Vector3 direction = movement.normalized;
+        float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+        drill.rotation = Quaternion.Euler(0, 0, -angle);
     }
 }
