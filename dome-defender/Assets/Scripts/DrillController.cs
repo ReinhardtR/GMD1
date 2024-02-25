@@ -44,9 +44,7 @@ public class DrillController : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(start, direction, range);
 
-        Vector3 end = hit.collider != null 
-            ? hit.point
-            : start + direction * range;
+        Vector3 end = hit.collider ? hit.point : start + direction * range;
 
         laser.SetPosition(0, start);
         laser.SetPosition(1, end);
