@@ -26,7 +26,7 @@ public class DrillController : MonoBehaviour
     }
 
     public void StartLaser() => laser.enabled = true;
-    public void StopLaser() => laser.enabled = true;
+    public void StopLaser() => laser.enabled = false;
 
     public void Rotate(Vector2 direction)
     {
@@ -44,14 +44,14 @@ public class DrillController : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(start, direction, range);
 
-        Vector3 end = hit.collider ? hit.point : start + direction * range;
+        Vector3 end = hit.collider ? hit.point : (start + direction * range);
 
         laser.SetPosition(0, start);
         laser.SetPosition(1, end);
 
         if (Time.time - lastFireTime >= fireRate)
         {
-            if (hit.collider != null && hit.collider.CompareTag("Rock"))
+            if (hit.collider && hit.collider.CompareTag("Rock"))
             {
                 RockController rock = hit.collider.GetComponent<RockController>();
                 rock.TakeDamage(damage);
