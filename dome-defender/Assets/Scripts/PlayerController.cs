@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    private Vector3 movement;
+    private Vector2 movement;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -29,16 +29,14 @@ public class PlayerController : MonoBehaviour
 
     public void OnPrimary(InputValue value) {
         if (value.isPressed) {
-            Debug.Log("Primary fired");
             drillController.StartLaser();
         } else {
-            Debug.Log("Primary released");
             drillController.StopLaser();
         }
     }
 
     private void MovePlayer() {
-        Vector3 delta = speed * Time.fixedDeltaTime * movement;
-        rb.MovePosition(transform.position + delta);
+        Vector2 delta = speed * Time.fixedDeltaTime * movement;
+        rb.MovePosition((Vector2) transform.position + delta);
     }
 }
