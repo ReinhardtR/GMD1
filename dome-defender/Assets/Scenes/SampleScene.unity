@@ -662,8 +662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f1d69b1dec64f6c85ed1c8ae4aa352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 5
-  Damage: 15
+  range: 4
+  Damage: 30
   fireRate: 0.1
   firePoint: {fileID: 1343557420}
 --- !u!1 &960930435
@@ -748,7 +748,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  laser: {fileID: 0}
 --- !u!212 &1147302735
 SpriteRenderer:
   m_ObjectHideFlags: 0

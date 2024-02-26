@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LaserController : MonoBehaviour
+public class LaserDrillController : MonoBehaviour
 {
     [SerializeField]
     private float range = 5f;
@@ -58,7 +58,7 @@ public class LaserController : MonoBehaviour
         {
             if (hit.collider)
             {
-                hit.collider.gameObject.SendMessage("OnLaserHit", this, SendMessageOptions.DontRequireReceiver);
+                hit.collider.gameObject.SendMessage("OnMine", Damage, SendMessageOptions.DontRequireReceiver);
             }
 
             lastFireTime = Time.time;

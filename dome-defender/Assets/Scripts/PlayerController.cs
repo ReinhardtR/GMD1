@@ -5,23 +5,23 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private float speed = 5.0f;
-    [SerializeField]
-    private GameObject laser;
 
-    private LaserController laserController;
+    private LaserDrillController laserDrill;
     private Rigidbody2D rb;
     private Vector2 movement;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        laserController = laser.GetComponent<LaserController>();
+
+        Transform laserDrillGameObject = transform.Find("LaserDrill");
+        laserDrill = laserDrillGameObject.GetComponent<LaserDrillController>();
     }
 
-    public void FixedUpdate()
+    void Update()
     {
         MovePlayer();
-        laserController.Rotate(movement.normalized);
+        laserDrill.Rotate(movement.normalized);
     }
 
     public void OnMovement(InputValue value)
@@ -33,11 +33,11 @@ public class PlayerController : MonoBehaviour
     {
         if (value.isPressed)
         {
-            laserController.StartLaser();
+            laserDrill.StartLaser();
         }
         else
         {
-            laserController.StopLaser();
+            laserDrill.StopLaser();
         }
     }
 
