@@ -1,11 +1,10 @@
 using UnityEngine;
 
-public class DrillController : MonoBehaviour
+public class LaserController : MonoBehaviour
 {
     [SerializeField]
     private float range = 5f;
-    [SerializeField]
-    private int damage = 15;
+    public int Damage = 15;
     [SerializeField]
     private float fireRate = 0.1f;
     [SerializeField]
@@ -17,7 +16,7 @@ public class DrillController : MonoBehaviour
     void Start()
     {
         laser = GetComponent<LineRenderer>();
-        laser.enabled = true;
+        laser.enabled = false;
     }
 
     void Update()
@@ -25,8 +24,14 @@ public class DrillController : MonoBehaviour
         UpdateLaser();
     }
 
-    public void StartLaser() => laser.enabled = true;
-    public void StopLaser() => laser.enabled = false;
+    public void StartLaser()
+    {
+        laser.enabled = true;
+    }
+    public void StopLaser()
+    {
+        laser.enabled = false;
+    }
 
     public void Rotate(Vector2 direction)
     {
@@ -51,10 +56,9 @@ public class DrillController : MonoBehaviour
 
         if (Time.time - lastFireTime >= fireRate)
         {
-            if (hit.collider && hit.collider.CompareTag("Rock"))
+            if (hit.collider)
             {
-                RockController rock = hit.collider.GetComponent<RockController>();
-                rock.TakeDamage(damage);
+                hit.collider.gameObject.SendMessage("OnLaserHit", this, SendMessageOptions.DontRequireReceiver);
             }
 
             lastFireTime = Time.time;

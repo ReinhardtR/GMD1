@@ -3,29 +3,26 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField]
-    private int maxHealth = 100;
-
-    public event Action OnDeath;
-
-    private int currentHealth;
+    public int MaxHealth { get; private set; } = 100;
+    public int CurrentHealth { get; private set; }
+    public event Action OnDeathEvent;
 
     void Start()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = MaxHealth;
     }
 
     public void TakeDamage(int damage)
     {
-        if (currentHealth <= 0) return;
+        if (CurrentHealth <= 0) return;
 
-        if (damage >= currentHealth)
+        if (damage >= CurrentHealth)
         {
-            currentHealth = 0;
-            OnDeath?.Invoke();
+            CurrentHealth = 0;
+            OnDeathEvent?.Invoke();
             return;
         }
-        
-        currentHealth -= damage;
+
+        CurrentHealth -= damage;
     }
 }

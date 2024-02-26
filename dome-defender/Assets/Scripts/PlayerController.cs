@@ -6,37 +6,44 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float speed = 5.0f;
     [SerializeField]
-    private GameObject drill;
-    private DrillController drillController;
+    private GameObject laser;
 
+    private LaserController laserController;
     private Rigidbody2D rb;
-
     private Vector2 movement;
 
-    void Start() {
+    void Start()
+    {
         rb = GetComponent<Rigidbody2D>();
-        drillController = drill.GetComponent<DrillController>();
+        laserController = laser.GetComponent<LaserController>();
     }
 
-    public void FixedUpdate() {
+    public void FixedUpdate()
+    {
         MovePlayer();
-        drillController.Rotate(movement.normalized);
+        laserController.Rotate(movement.normalized);
     }
 
-    public void OnMovement(InputValue value) {
+    public void OnMovement(InputValue value)
+    {
         movement = value.Get<Vector2>();
     }
 
-    public void OnPrimary(InputValue value) {
-        if (value.isPressed) {
-            drillController.StartLaser();
-        } else {
-            drillController.StopLaser();
+    public void OnPrimary(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            laserController.StartLaser();
+        }
+        else
+        {
+            laserController.StopLaser();
         }
     }
 
-    private void MovePlayer() {
+    private void MovePlayer()
+    {
         Vector2 delta = speed * Time.fixedDeltaTime * movement;
-        rb.MovePosition((Vector2) transform.position + delta);
+        rb.MovePosition((Vector2)transform.position + delta);
     }
 }
