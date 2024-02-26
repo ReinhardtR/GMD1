@@ -469,10 +469,10 @@ GameObject:
   m_Component:
   - component: {fileID: 727768250}
   - component: {fileID: 727768251}
-  - component: {fileID: 727768253}
   - component: {fileID: 727768254}
+  - component: {fileID: 727768255}
   m_Layer: 0
-  m_Name: Drill
+  m_Name: LaserDrill
   m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,22 +546,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &727768253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 727768249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02f1d69b1dec64f6c85ed1c8ae4aa352, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 3
-  Damage: 15
-  fireRate: 0.1
-  firePoint: {fileID: 1343557420}
 --- !u!120 &727768254
 LineRenderer:
   serializedVersion: 2
@@ -666,6 +650,22 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &727768255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727768249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f1d69b1dec64f6c85ed1c8ae4aa352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 5
+  Damage: 15
+  fireRate: 0.1
+  firePoint: {fileID: 1343557420}
 --- !u!1 &960930435
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,7 +748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  drill: {fileID: 727768249}
+  laser: {fileID: 0}
 --- !u!212 &1147302735
 SpriteRenderer:
   m_ObjectHideFlags: 0
