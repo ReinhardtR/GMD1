@@ -15,7 +15,6 @@ public class Mineable : MonoBehaviour
 
     public void OnMine(int damage)
     {
-        Debug.Log("Mineable hit for: " + damage + " damage.");
         health.TakeDamage(damage);
         OnMineEvent?.Invoke();
     }

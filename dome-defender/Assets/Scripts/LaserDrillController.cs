@@ -1,12 +1,16 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LaserDrillController : MonoBehaviour
 {
     [SerializeField]
-    private float range = 5f;
-    public int Damage = 15;
+    private int damage = 15;
     [SerializeField]
     private float fireRate = 0.1f;
+    [SerializeField]
+    private float range = 5f;
+    [SerializeField]
+    private float width = 0.5f;
     [SerializeField]
     private Transform firePoint;
 
@@ -16,6 +20,8 @@ public class LaserDrillController : MonoBehaviour
     void Start()
     {
         laser = GetComponent<LineRenderer>();
+        laser.startWidth = width;
+        laser.endWidth = width;
         laser.enabled = false;
     }
 
@@ -24,11 +30,11 @@ public class LaserDrillController : MonoBehaviour
         UpdateLaser();
     }
 
-    public void StartLaser()
+    public void StartDrill()
     {
         laser.enabled = true;
     }
-    public void StopLaser()
+    public void StopDrill()
     {
         laser.enabled = false;
     }
@@ -44,24 +50,53 @@ public class LaserDrillController : MonoBehaviour
     {
         if (!laser.enabled) return;
 
-        Vector3 start = firePoint.position;
-        Vector3 direction = transform.up;
+        Vector2 start = firePoint.position;
+        Vector2 direction = transform.up;
+        Vector2 size = new(width, width);
 
-        RaycastHit2D hit = Physics2D.Raycast(start, direction, range);
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(start, size, 0, direction, range);
 
-        Vector3 end = hit.collider ? hit.point : (start + direction * range);
+        Vector2 end = hits.Length > 0
+            ? Vector2.zero
+            : start + direction * range;
+
+        bool hitRock = false;
+        foreach (RaycastHit2D hit in hits)
+        {
+            Debug.Log(hit.point);
+            if (hit.distance > Vector2.Distance(transform.position, end))
+            {
+                end = hit.point;
+            }
+
+            if (Time.time - lastFireTime >= fireRate)
+            {
+                if (hit.collider)
+                {
+                    hit.collider.gameObject.SendMessage("OnMine", damage, SendMessageOptions.DontRequireReceiver);
+                    hitRock = true;
+                }
+            }
+        }
+
+        if (hitRock) lastFireTime = Time.time;
 
         laser.SetPosition(0, start);
         laser.SetPosition(1, end);
 
-        if (Time.time - lastFireTime >= fireRate)
-        {
-            if (hit.collider)
-            {
-                hit.collider.gameObject.SendMessage("OnMine", Damage, SendMessageOptions.DontRequireReceiver);
-            }
+        Debug.DrawLine(start, end, Color.red);
 
-            lastFireTime = Time.time;
-        }
+        Vector2 forwardDir = direction.normalized * range;
+        Vector2 rightDir = new Vector2(direction.y, -direction.x) * size.x / 2f;
+
+        Vector2 topLeft = start + forwardDir / 2f + rightDir;
+        Vector2 topRight = start + forwardDir / 2f - rightDir;
+        Vector2 bottomLeft = start - forwardDir / 2f + rightDir;
+        Vector2 bottomRight = start - forwardDir / 2f - rightDir;
+
+        Debug.DrawLine(topLeft, topRight, Color.green);
+        Debug.DrawLine(topRight, bottomRight, Color.green);
+        Debug.DrawLine(bottomRight, bottomLeft, Color.green);
+        Debug.DrawLine(bottomLeft, topLeft, Color.green);
     }
 }

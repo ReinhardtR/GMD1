@@ -31,7 +31,7 @@ I wanted to keep this component simple, so that it can be used for other entitie
 **_Laser_**
 I added a laser to the player, which can be fired with the left mouse button. To draw the laser I use a `LineRenderer`, which is a Unity component that draws a line between two points.
 
-To detect collisions I use the `Physics2D`.Raycast method, which returns a `RaycastHit2D` object if it hits something. I then use the `RaycastHit2D` to draw the line.
+To detect collisions I use the `Physics2D.Raycast` method, which returns a `RaycastHit2D` object if it hits something. I then use the `RaycastHit2D` to draw the line.
 
 I use tags to determine if the laser hit a rock, and if so, I called a method on the rock to deal damage. I wrap this in some logic to make the laser have a "fire rate", so the rocks don't get destroyed instantly.
 
@@ -56,3 +56,12 @@ I did improve it a little though, by using the `SendMessage` method, and sending
 
 **_Clean Up_**
 I cleaned some of the naming conventions, and moved some logic into smaller component. E.g. the RockController no longer exists (for now), since the "Mineable" logic now has it's own component.
+
+## Work Session 4
+
+**_Hitting Multiple Rocks at Once_**
+I'm trying to implement a wide laser, so that it can hit multiple rocks at once. To do this I can't use the `Physics2D.Raycast` method, since that has no width. Instead I'm trying to use the `Physics2D.BoxCastAll` method, which returns an array of `RaycastHit2D` objects.
+
+But I'm having issues drawing the laser straight. This was easy with a Raycast, since the cast was simply straight from the lasers direction, but a BoxCast might hit somewhere else than straight. But I wan't to keep the laser straight. I also want to draw the laser to the furthest hit point, so it's not being cut off my the closes hit point.
+
+I'm also having issues with the BoxCast hitting through layers of rocks. I'm gonna have to look into this in the next work sesion.

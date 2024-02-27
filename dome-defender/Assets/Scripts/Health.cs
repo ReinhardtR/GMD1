@@ -6,6 +6,7 @@ public class Health : MonoBehaviour
     public int MaxHealth { get; private set; } = 100;
     public int CurrentHealth { get; private set; }
     public event Action OnDeathEvent;
+    public event Action<int> OnDamageEvent;
 
     void Start()
     {
@@ -15,6 +16,8 @@ public class Health : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (CurrentHealth <= 0) return;
+
+        OnDamageEvent?.Invoke(damage);
 
         if (damage >= CurrentHealth)
         {
