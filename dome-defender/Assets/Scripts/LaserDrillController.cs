@@ -90,7 +90,7 @@ public class LaserDrillController : MonoBehaviour
 
         if (collidersHit.Count > 0) lastFireTime = Time.time;
 
-        Debug.DrawLine(start, end, Color.red, 0.1f);
+        // Debug.DrawLine(start, end, Color.red, 0.1f);
         laser.SetPosition(0, start);
         laser.SetPosition(1, end);
     }

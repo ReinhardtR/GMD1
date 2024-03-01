@@ -13,8 +13,14 @@ public class Mineable : MonoBehaviour
         health.OnDeathEvent += () => Destroy(gameObject);
     }
 
+    void OnDestroy()
+    {
+        health.OnDeathEvent -= () => Destroy(gameObject);
+    }
+
     public void OnMine(int damage)
     {
+        // Debug.Log($"Mineable took {damage} damage");
         health.TakeDamage(damage);
         OnMineEvent?.Invoke();
     }

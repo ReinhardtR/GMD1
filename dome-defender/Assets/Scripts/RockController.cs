@@ -21,10 +21,15 @@ public class RockController : MonoBehaviour
         sprite.material.color = startColor;
     }
 
+    void OnDestroy()
+    {
+        health.OnDamageEvent -= OnDamage;
+    }
+
     public void OnDamage(int damage)
     {
-        float t = 1 - (float)health.CurrentHealth / health.MaxHealth;
-        Debug.Log(t);
+        float t = 1f - (float)health.CurrentHealth / health.MaxHealth;
         sprite.material.color = Color.Lerp(startColor, endColor, t);
+        // Debug.Log($"Current Health: {health.CurrentHealth}/{health.MaxHealth} ({t:P})");
     }
 }
