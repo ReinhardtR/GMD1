@@ -65,3 +65,24 @@ I'm trying to implement a wide laser, so that it can hit multiple rocks at once.
 But I'm having issues drawing the laser straight. This was easy with a Raycast, since the cast was simply straight from the lasers direction, but a BoxCast might hit somewhere else than straight. But I wan't to keep the laser straight. I also want to draw the laser to the furthest hit point, so it's not being cut off my the closes hit point.
 
 I'm also having issues with the BoxCast hitting through layers of rocks. I'm gonna have to look into this in the next work sesion.
+
+## Work Session 5
+
+**_Going back to Raycasts_**
+I decided to go back to using Raycasts for the laser, since I couldn't get the BoxCast to work properly. The issue is that the BoxCast doesn't get cut off after colliding, the BoxCat always includes everything in the path.
+
+My solution is to fire multiple raycasts, to be able to hit multiple rocks at once. The amount of raycasts being fired, is calculated based on the width of the laser.
+
+I cast the raycasts in a loop, and calculate which collision is the furthest, and render the position of the laser based on that. To make sure I don't trigger a damage event on the same rock multiple times, I keep a list of rocks that have been hit, and check if the rock has already been hit before triggering the damage event.
+
+**_Rethinking the Movement Input_**
+Until this point, the player would simply move in the direction of the Joystick. This meant that when the player wanted to mine upwards, they would have to also move upwards.
+
+This felt a little clunky, and I wanted to find an alternative, and I think I found one.
+
+I've now removed the `Jump` button, and replaced it with a `Boost` button. When the player presses the `Boost` button, the player will move in the current direction. This means that the player can change direction without moving, and it feels a lot better.
+
+To make this work the player no longer has gravity, and will always be floating. To make this make sense, the story is that the planet has zero gravity (for some mysterious reason), and the player has a jetpack. This is why the button is called `Boost`.
+
+**_Migrating away from Unity Input System_**
+I've decided to migrate away from the new Unity Input System, and instead use the Input Manager. The new input system is great, but it's a little overkill for this project. The Input Manager is a lot simpler, and seems generaly easier to work with, and there is more documentation on it.
