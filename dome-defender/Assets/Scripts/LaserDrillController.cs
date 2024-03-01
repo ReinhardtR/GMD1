@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LaserDrillController : MonoBehaviour
@@ -50,53 +50,48 @@ public class LaserDrillController : MonoBehaviour
     {
         if (!laser.enabled) return;
 
+        bool isOnCooldown = Time.time - lastFireTime < fireRate;
+
         Vector2 start = firePoint.position;
         Vector2 direction = transform.up;
-        Vector2 size = new(width, width);
+        Vector2 end = start + direction * range;
 
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(start, size, 0, direction, range);
+        // Adjust 0.1f based on desired raycast spacing
+        int numberOfRays = Mathf.CeilToInt(width / 0.1f);
 
-        Vector2 end = hits.Length > 0
-            ? Vector2.zero
-            : start + direction * range;
-
-        bool hitRock = false;
-        foreach (RaycastHit2D hit in hits)
+        float farthestDistance = 0;
+        List<int> collidersHit = new();
+        for (int i = 0; i < numberOfRays; i++)
         {
-            Debug.Log(hit.point);
-            if (hit.distance > Vector2.Distance(transform.position, end))
+            float offset = (width / 2) - (i * width / (numberOfRays - 1));
+            Vector2 rayStart = start + ((Vector2)transform.right * offset);
+
+            // Debug.DrawRay(rayStart, direction * range, Color.red);
+            RaycastHit2D hit = Physics2D.Raycast(rayStart, direction, range);
+            if (!hit.collider) continue;
+
+            // Ensure the same collider doesn't get hit multiple times
+            int colliderID = hit.collider.GetInstanceID();
+            if (collidersHit.Contains(colliderID)) continue;
+            collidersHit.Add(colliderID);
+
+            // To calculate where to end the laser, we need to find the farthest collider
+            float distanceToCollider = Vector2.Distance(start, hit.collider.bounds.center);
+            if (distanceToCollider > farthestDistance)
             {
-                end = hit.point;
+                farthestDistance = distanceToCollider;
+                if (farthestDistance > range) farthestDistance = range;
+                end = start + direction * farthestDistance;
             }
 
-            if (Time.time - lastFireTime >= fireRate)
-            {
-                if (hit.collider)
-                {
-                    hit.collider.gameObject.SendMessage("OnMine", damage, SendMessageOptions.DontRequireReceiver);
-                    hitRock = true;
-                }
-            }
+            if (isOnCooldown) continue;
+            hit.collider.gameObject.SendMessage("OnMine", damage);
         }
 
-        if (hitRock) lastFireTime = Time.time;
+        if (collidersHit.Count > 0) lastFireTime = Time.time;
 
+        Debug.DrawLine(start, end, Color.red, 0.1f);
         laser.SetPosition(0, start);
         laser.SetPosition(1, end);
-
-        Debug.DrawLine(start, end, Color.red);
-
-        Vector2 forwardDir = direction.normalized * range;
-        Vector2 rightDir = new Vector2(direction.y, -direction.x) * size.x / 2f;
-
-        Vector2 topLeft = start + forwardDir / 2f + rightDir;
-        Vector2 topRight = start + forwardDir / 2f - rightDir;
-        Vector2 bottomLeft = start - forwardDir / 2f + rightDir;
-        Vector2 bottomRight = start - forwardDir / 2f - rightDir;
-
-        Debug.DrawLine(topLeft, topRight, Color.green);
-        Debug.DrawLine(topRight, bottomRight, Color.green);
-        Debug.DrawLine(bottomRight, bottomLeft, Color.green);
-        Debug.DrawLine(bottomLeft, topLeft, Color.green);
     }
 }
