@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,40 +7,46 @@ public class PlayerController : MonoBehaviour
 
     private LaserDrillController drill;
     private Rigidbody2D rb;
-    private Vector2 movement;
+    private Vector2 direction;
+    private bool isBoosting;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         drill = GetComponentInChildren<LaserDrillController>();
+        isBoosting = false;
+        direction = transform.up;
     }
 
     void Update()
     {
+        HandleInput();
         MovePlayer();
-        drill.Rotate(movement.normalized);
+        drill.Rotate(direction);
     }
 
-    public void OnMovement(InputValue value)
+    private void HandleInput()
     {
-        movement = value.Get<Vector2>();
-    }
+        // Drilling
+        if (Input.GetButton("Primary")) drill.StartDrill();
+        else drill.StopDrill();
 
-    public void OnPrimary(InputValue value)
-    {
-        if (value.isPressed)
+        // Boosting
+        isBoosting = Input.GetButton("Boost");
+
+        // Movement/Direction Change
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        if (horizontal != 0 || vertical != 0)
         {
-            drill.StartDrill();
-        }
-        else
-        {
-            drill.StopDrill();
+            direction = new Vector2(horizontal, vertical).normalized;
         }
     }
 
     private void MovePlayer()
     {
-        Vector2 delta = speed * Time.fixedDeltaTime * movement;
+        if (!isBoosting) return;
+        Vector2 delta = speed * Time.fixedDeltaTime * direction;
         rb.MovePosition((Vector2)transform.position + delta);
     }
 }
