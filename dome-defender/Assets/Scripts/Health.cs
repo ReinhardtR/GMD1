@@ -17,15 +17,16 @@ public class Health : MonoBehaviour
     {
         if (CurrentHealth <= 0) return;
 
-        OnDamageEvent?.Invoke(damage);
 
         if (damage >= CurrentHealth)
         {
             CurrentHealth = 0;
+            OnDamageEvent?.Invoke(damage);
             OnDeathEvent?.Invoke();
             return;
         }
 
         CurrentHealth -= damage;
+        OnDamageEvent?.Invoke(damage);
     }
 }
