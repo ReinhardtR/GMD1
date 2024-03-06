@@ -206,7 +206,9 @@ The player will feel a sense of fear when they are defending the base from the w
 ## Project Miletones
 
 **1. Movement and Mining System**
+
 **2. Base and Enemies System**
+
 **3. Upgrades System**
 
 *****
