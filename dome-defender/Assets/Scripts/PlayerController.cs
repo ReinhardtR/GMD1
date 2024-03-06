@@ -10,43 +10,38 @@ public class PlayerController : MonoBehaviour
     private Vector2 direction;
     private bool isBoosting;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         drill = GetComponentInChildren<LaserDrillController>();
+    }
+
+    void Start()
+    {
         isBoosting = false;
         direction = transform.up;
     }
 
     void Update()
     {
-        HandleInput();
-        MovePlayer();
-        drill.Rotate(direction);
-    }
-
-    private void HandleInput()
-    {
-        // Drilling
         if (Input.GetButton("Primary")) drill.StartDrill();
         else drill.StopDrill();
+    }
 
-        // Boosting
+    void FixedUpdate()
+    {
         isBoosting = Input.GetButton("Boost");
 
-        // Movement/Direction Change
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         if (horizontal != 0 || vertical != 0)
         {
             direction = new Vector2(horizontal, vertical).normalized;
         }
-    }
 
-    private void MovePlayer()
-    {
-        if (!isBoosting) return;
-        Vector2 delta = speed * Time.fixedDeltaTime * direction;
-        rb.MovePosition((Vector2)transform.position + delta);
+        drill.Rotate(direction);
+
+        if (isBoosting) rb.velocity = direction * speed;
+        else rb.velocity = Vector2.zero;
     }
 }

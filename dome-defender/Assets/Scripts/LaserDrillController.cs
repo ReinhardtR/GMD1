@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LaserDrillController : MonoBehaviour
@@ -10,19 +12,25 @@ public class LaserDrillController : MonoBehaviour
     [SerializeField]
     private float range = 5f;
     [SerializeField]
-    private float width = 0.5f;
+    private float width = 0.6f; // Should be even number
     [SerializeField]
     private Transform firePoint;
 
     private LineRenderer laser;
     private float lastFireTime;
 
-    void Start()
+    void Awake()
     {
         laser = GetComponent<LineRenderer>();
+    }
+
+    void Start()
+    {
         laser.startWidth = width;
         laser.endWidth = width;
         laser.enabled = false;
+
+        lastFireTime = 0;
     }
 
     void Update()
@@ -50,15 +58,13 @@ public class LaserDrillController : MonoBehaviour
     {
         if (!laser.enabled) return;
 
-        bool isOnCooldown = Time.time - lastFireTime < fireRate;
-
         Vector2 start = firePoint.position;
         Vector2 direction = transform.up;
-        Vector2 end = start + direction * range;
+
+        bool isOnCooldown = Time.time < lastFireTime + fireRate;
 
         // Adjust 0.1f based on desired raycast spacing
         int numberOfRays = Mathf.CeilToInt(width / 0.1f);
-
         float farthestDistance = 0;
         List<int> collidersHit = new();
         for (int i = 0; i < numberOfRays; i++)
@@ -68,7 +74,11 @@ public class LaserDrillController : MonoBehaviour
 
             // Debug.DrawRay(rayStart, direction * range, Color.red);
             RaycastHit2D hit = Physics2D.Raycast(rayStart, direction, range);
-            if (!hit.collider) continue;
+            if (!hit.collider)
+            {
+                farthestDistance = range;
+                continue;
+            }
 
             // Ensure the same collider doesn't get hit multiple times
             int colliderID = hit.collider.GetInstanceID();
@@ -80,15 +90,20 @@ public class LaserDrillController : MonoBehaviour
             if (distanceToCollider > farthestDistance)
             {
                 farthestDistance = distanceToCollider;
-                if (farthestDistance > range) farthestDistance = range;
-                end = start + direction * farthestDistance;
             }
 
             if (isOnCooldown) continue;
-            hit.collider.gameObject.SendMessage("OnMine", damage);
+
+            Mineable mineable = hit.collider.gameObject.GetComponent<Mineable>();
+            if (mineable)
+            {
+                mineable.TakeDamage(damage);
+                lastFireTime = Time.time;
+            }
         }
 
-        if (collidersHit.Count > 0) lastFireTime = Time.time;
+        float distance = farthestDistance > range ? range : farthestDistance;
+        Vector2 end = start + direction * distance;
 
         // Debug.DrawLine(start, end, Color.red, 0.1f);
         laser.SetPosition(0, start);

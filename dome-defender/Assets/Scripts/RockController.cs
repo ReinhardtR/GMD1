@@ -1,35 +1,51 @@
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
+[RequireComponent(typeof(Mineable))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class RockController : MonoBehaviour
 {
     private SpriteRenderer sprite;
     private Health health;
+    private Mineable mineable;
 
-    // #5F5F5F
-    private readonly Color startColor = new(0.373f, 0.373f, 0.373f);
-    // #444444
-    private readonly Color endColor = new(0.267f, 0.267f, 0.267f);
+    void Awake()
+    {
+        health = GetComponent<Health>();
+        mineable = GetComponent<Mineable>();
+        sprite = GetComponent<SpriteRenderer>();
+    }
 
     void Start()
     {
-        health = GetComponent<Health>();
-        health.OnDamageEvent += OnDamage;
-
-        sprite = GetComponent<SpriteRenderer>();
-        sprite.material.color = startColor;
+        SetColor(mineable.RockType.StartColor);
     }
 
-    void OnDestroy()
+    void OnEnable()
     {
-        health.OnDamageEvent -= OnDamage;
+        if (health) health.OnDamageEvent += OnDamage;
+    }
+
+    void OnDisable()
+    {
+        if (health) health.OnDamageEvent -= OnDamage;
     }
 
     public void OnDamage(int damage)
     {
-        float t = 1f - (float)health.CurrentHealth / health.MaxHealth;
-        sprite.material.color = Color.Lerp(startColor, endColor, t);
-        // Debug.Log($"Current Health: {health.CurrentHealth}/{health.MaxHealth} ({t:P})");
+        Color newColor = Color.Lerp(
+            mineable.RockType.StartColor,
+            mineable.RockType.EndColor,
+            1f - (float)health.CurrentHealth / health.MaxHealth
+        );
+
+        SetColor(newColor);
+    }
+
+    public void SetColor(Color color)
+    {
+        sprite.color = color;
+        sprite.material.color = color;
     }
 }

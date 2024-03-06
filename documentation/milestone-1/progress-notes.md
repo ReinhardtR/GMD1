@@ -86,3 +86,25 @@ To make this work the player no longer has gravity, and will always be floating.
 
 **_Migrating away from Unity Input System_**
 I've decided to migrate away from the new Unity Input System, and instead use the Input Manager. The new input system is great, but it's a little overkill for this project. The Input Manager is a lot simpler, and seems generaly easier to work with, and there is more documentation on it.
+
+## Work Session 6
+
+**_Unity Event Functions_**
+
+I found plenty of small bugs and issues caused by using the wrong Unity event functions. Specifically the `Awake`, `Start` and `OnEnable` functions. I was unaware of when to use which, and when they were executed. [This article](https://gamedevbeginner.com/start-vs-awake-in-unity/) helped me understand the differences. I also found out that the `OnEnable` function is called every time the object is enabled, which is what I needed when spawning ores with my `TerrainGenerator` script.
+
+**_Spawning Ores_**
+I made a `Enumeration` class, that I can use to make enum classes. I made a `RockType` enum, which stores all relevant information for each type of rock.
+
+- `name` is the name of the rock.
+- `StartColor` is the color of the rock when it's on full health.
+- `EndColor` is the color of the rock when it's on zero health.
+- `MaxHealth` is the maximum health of the rock.
+- `SpawnChance` is the chance of the rock spawning in the terrain.
+- `DropAmount` is the amount of ores the rock drops when destroyed.
+
+This way all the information of the enum is stored in the enum class, and not scattered around the components. I really liked this approach, and I think I will use it for items in the game.
+
+I made the `TerrainGenerator` spawn ores based on the `SpawnChance` of the `RockType` enum. I also made the `Mineable` component have a `RockType` variable. So the health and color of the rock can be set based on the `RockType` enum.
+
+I still need to implement the dropping of ores, and the player picking them up. But I think I will do that in the next work session.
