@@ -108,3 +108,14 @@ This way all the information of the enum is stored in the enum class, and not sc
 I made the `TerrainGenerator` spawn ores based on the `SpawnChance` of the `RockType` enum. I also made the `Mineable` component have a `RockType` variable. So the health and color of the rock can be set based on the `RockType` enum.
 
 I still need to implement the dropping of ores, and the player picking them up. But I think I will do that in the next work session.
+
+## Work Session 7
+
+**_Dropping Ores_**
+I made an `ItemType` enum class, that contains all the items that can be on the ground, including the ores from mining rocks.
+
+I made an Item prefab, that has a `SpriteRenderer`, a `BoxCollider2D` and a `Rigidbody2D`. The `Rigidbody2D` is set to kinematic, so the item doesn't fall to the ground.
+
+I made a `ItemSpawner` helper class to spawn items, which can be used by other components. Since the `ItemSpawner` is not in the scene, and can't be passed the prefab through the inspector, I use `Resources.Load` to get a reference of the prefab. This requires the `Item` prefab to be in a folder called `Resources`.
+
+I made a `Pickupable` component, which on collision triggers destroys the game object.
