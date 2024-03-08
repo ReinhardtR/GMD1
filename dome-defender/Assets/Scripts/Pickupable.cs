@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class Pickupable : MonoBehaviour
 {
+    public ItemType ItemType { get; set; }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Picked up item");
-
+            other.GetComponent<PlayerInventory>().AddItem(ItemType);
             Destroy(gameObject);
         }
     }

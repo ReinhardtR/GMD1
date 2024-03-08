@@ -19,10 +19,15 @@ public static class ItemSpawner
     {
         GameObject item = Object.Instantiate(itemPrefab, position, Quaternion.identity);
 
+        Rigidbody2D rb = item.GetComponent<Rigidbody2D>();
         Vector2 initialForce = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 100;
-        item.GetComponent<Rigidbody2D>().AddForce(initialForce);
+        rb.AddForce(initialForce);
 
-        item.GetComponent<SpriteRenderer>().color = itemType.Color;
+        Pickupable pickupable = item.GetComponent<Pickupable>();
+        pickupable.ItemType = itemType;
+
+        SpriteRenderer spriteRenderer = item.GetComponent<SpriteRenderer>();
+        spriteRenderer.color = itemType.Color;
 
         return item;
     }

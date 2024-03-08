@@ -114,8 +114,28 @@ I still need to implement the dropping of ores, and the player picking them up. 
 **_Dropping Ores_**
 I made an `ItemType` enum class, that contains all the items that can be on the ground, including the ores from mining rocks.
 
-I made an Item prefab, that has a `SpriteRenderer`, a `BoxCollider2D` and a `Rigidbody2D`. The `Rigidbody2D` is set to kinematic, so the item doesn't fall to the ground.
+I've made an Item prefab, that has a `SpriteRenderer`, a `BoxCollider2D` and a `Rigidbody2D`. The `Rigidbody2D` is set to kinematic, so the item doesn't fall to the ground.
 
-I made a `ItemSpawner` helper class to spawn items, which can be used by other components. Since the `ItemSpawner` is not in the scene, and can't be passed the prefab through the inspector, I use `Resources.Load` to get a reference of the prefab. This requires the `Item` prefab to be in a folder called `Resources`.
+I've made a `ItemSpawner` helper class to spawn items, which can be used by other components. Since the `ItemSpawner` is not in the scene, and can't be passed the prefab through the inspector, I use `Resources.Load` to get a reference of the prefab. This requires the `Item` prefab to be in a folder called `Resources`.
 
-I made a `Pickupable` component, which on collision triggers destroys the game object.
+I've made a `Pickupable` component, which on collision triggers destroys the game object.
+
+**_Picking Up Ores_**
+I've made a `PlayerInventory` component to store the items in the players inventory. The `PlayerInventory` has a `Dictionary` of `ItemType` and `int`, which stores the amount of each item in the inventory.
+
+I've added a weight value to each item in the `ItemType` enum class, which will be used to calculate the players inventory weight.
+
+I've made the `Pickupable` component, add the items to the players inventory when the player collides with the item. I identify that the player is the collider by using tags.
+
+## Work Session 8
+
+**_Implementing the Weight Mechanic_**
+I've added a max weight to the player inventory, this is current just a private `SerializeField` variable. But I will probably want to be able to upgrade this in the shop. This might require it to be pubic. I've not decided on a strategy to create upgrades yet.
+
+I've added a penalty to the player speed based on the total weight of the items in the player inventory. This is to make the player think about what they pick up, and not just pick up everything.
+
+**_Removing the Weight Mechanic_**
+I decided to remove the weight of the inventory, since it was a an annoying micro management feature, and didn't add much to the game. It was enough for the player to think about the time when mining, and the time it takes to mine the ores. So they player still have to think about what they take the time to mine and pickup, but players who have very efective mining strategies won't be limited by their weight.
+
+**_Placeholder UI_**
+Made some placeholder UI text to tell the player what is in their inventory. And also a text element to tell the user their speed. Which can be changed in the future by upgrades.

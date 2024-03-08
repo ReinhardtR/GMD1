@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private float speed = 5.0f;
+    public float Speed { get; } = 5f;
 
     private LaserDrillController drill;
     private Rigidbody2D rb;
+
     private Vector2 direction;
     private bool isBoosting;
 
@@ -38,10 +38,9 @@ public class PlayerController : MonoBehaviour
         {
             direction = new Vector2(horizontal, vertical).normalized;
         }
-
         drill.Rotate(direction);
 
-        if (isBoosting) rb.velocity = direction * speed;
+        if (isBoosting) rb.velocity = direction * Speed;
         else rb.velocity = Vector2.zero;
     }
 }
