@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LaserDrillController : MonoBehaviour
@@ -49,14 +47,21 @@ public class LaserDrillController : MonoBehaviour
 
     public void Rotate(Vector2 direction)
     {
-        if (direction == Vector2.zero) return;
+        if (direction == Vector2.zero)
+        {
+            return;
+        }
+
         float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, -angle);
     }
 
     private void UpdateLaser()
     {
-        if (!laser.enabled) return;
+        if (!laser.enabled)
+        {
+            return;
+        }
 
         Vector2 start = firePoint.position;
         Vector2 direction = transform.up;
@@ -82,7 +87,10 @@ public class LaserDrillController : MonoBehaviour
 
             // Ensure the same collider doesn't get hit multiple times
             int colliderID = hit.collider.GetInstanceID();
-            if (collidersHit.Contains(colliderID)) continue;
+            if (collidersHit.Contains(colliderID))
+            {
+                continue;
+            }
             collidersHit.Add(colliderID);
 
             // To calculate where to end the laser, we need to find the farthest collider
@@ -92,7 +100,10 @@ public class LaserDrillController : MonoBehaviour
                 farthestDistance = distanceToCollider;
             }
 
-            if (isOnCooldown) continue;
+            if (isOnCooldown)
+            {
+                continue;
+            }
 
             Mineable mineable = hit.collider.gameObject.GetComponent<Mineable>();
             if (mineable)

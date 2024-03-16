@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1966bd0f6254e64ac86ed3f5d84634, type: 3}
+  m_Name: StoneSpriteHandler
+  m_EditorClassIdentifier: 
+  none: {fileID: 21300000, guid: d6ec331ba117440dca6f731252e7d140, type: 3}
+  all: {fileID: 21300000, guid: 71e129a48664445dcad4037181bb7ce9, type: 3}
+  top: {fileID: 21300000, guid: bd5288d801a564c688d60af178cb25a0, type: 3}
+  right: {fileID: 21300000, guid: caacd485833c04a0b9d3a2f1c70e7561, type: 3}
+  bottom: {fileID: 21300000, guid: 2764663a1400e4651bd64e92182fd030, type: 3}
+  left: {fileID: 21300000, guid: 0cd9b5e1dd49a4638afe39f29245f3f0, type: 3}
+  topLeft: {fileID: 21300000, guid: a5c37caf53f0945b5b3b18937553ad4f, type: 3}
+  topRight: {fileID: 21300000, guid: b7b232bbbd4614917b597f6ff1bb21b3, type: 3}
+  topBottom: {fileID: 21300000, guid: 8f7aec5cb7a2f499b9f28f0b5686ca6e, type: 3}
+  rightBottom: {fileID: 21300000, guid: d4cfc455a84184c09a57d85574b25ee2, type: 3}
+  bottomLeft: {fileID: 21300000, guid: 0e44eaad8105d48fc9b3abff041b65d3, type: 3}
+  rightLeft: {fileID: 21300000, guid: e193a77166927476f913b06744d8df24, type: 3}
+  topRightBottom: {fileID: 21300000, guid: f84d8286f85514c7489ec8a8cdda1393, type: 3}
+  topRightLeft: {fileID: 21300000, guid: e50825463678048b2a188de8ffb89ffb, type: 3}
+  topBottomLeft: {fileID: 21300000, guid: 48c239cf8a3534564ae79249b78ee44a, type: 3}
+  rightBottomLeft: {fileID: 21300000, guid: 98878ae0620164e2b911d1b18bc00e6e, type: 3}

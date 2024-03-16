@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class InventoryText : MonoBehaviour
 {
+    public Inventory Inventory;
+
     private TextMeshProUGUI textMesh;
-    private PlayerInventory inventory;
 
     void Awake()
     {
@@ -15,30 +14,38 @@ public class InventoryText : MonoBehaviour
 
     void Start()
     {
-        inventory = GameObject.FindGameObjectWithTag("Player")
-            .GetComponent<PlayerInventory>();
-
-        inventory.OnItemsChange += UpdateText;
         UpdateText();
     }
 
     void OnEnable()
     {
-        if (inventory) inventory.OnItemsChange += UpdateText;
+        if (Inventory)
+        {
+            Inventory.OnItemsChangedEvent += UpdateText;
+        }
     }
 
     void OnDisable()
     {
-        if (inventory) inventory.OnItemsChange -= UpdateText;
+        if (Inventory)
+        {
+            Inventory.OnItemsChangedEvent -= UpdateText;
+        }
     }
 
     private void UpdateText()
     {
-        string text = "Inventory:\n";
-        foreach (var item in inventory.Items)
+        if (Inventory == null)
         {
-            text += $"{item.Key}: {item.Value}\n";
+            return;
         }
+
+        string text = "Inventory\n";
+        foreach (var (item, amount) in Inventory.Items)
+        {
+            text += $"{item.Name}: {amount}\n";
+        }
+
         textMesh.text = text;
     }
 }

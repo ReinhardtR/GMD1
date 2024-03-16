@@ -24,8 +24,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButton("Primary")) drill.StartDrill();
-        else drill.StopDrill();
+        if (Input.GetButton("Primary"))
+        {
+            drill.StartDrill();
+        }
+        else
+        {
+            drill.StopDrill();
+        }
     }
 
     void FixedUpdate()
@@ -40,7 +46,13 @@ public class PlayerController : MonoBehaviour
         }
         drill.Rotate(direction);
 
-        if (isBoosting) rb.velocity = direction * Speed;
-        else rb.velocity = Vector2.zero;
+        if (isBoosting)
+        {
+            rb.velocity = direction * Speed;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 }

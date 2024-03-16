@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7707d97a43a0b48dfbd3989741820c19, type: 3}
+  m_Name: Gold
+  m_EditorClassIdentifier: 
+  Name: Gold
+  MaxHealth: 400
+  SpawnChance: 0.07
+  DropAmount: 1
+  DropItem: {fileID: 11400000, guid: 40e4e1b3a937c4097990aa7c9064acb8, type: 2}
+  StartColor: {r: 1, g: 0.8741453, b: 0, a: 1}
+  EndColor: {r: 0.4528302, g: 0.3546584, b: 0.0021359965, a: 1}

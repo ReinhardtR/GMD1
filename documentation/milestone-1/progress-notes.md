@@ -139,3 +139,73 @@ I decided to remove the weight of the inventory, since it was a an annoying micr
 
 **_Placeholder UI_**
 Made some placeholder UI text to tell the player what is in their inventory. And also a text element to tell the user their speed. Which can be changed in the future by upgrades.
+
+## Work Session 9
+
+**_Chunking Terrain_**
+I've decided to make a chunking system, since the plan is to procedurally generate the terrain. For this to be performant, I need to chunk the terrain, so that I don't have to generate the entire terrain at once.
+
+To do this I had to add a bunch of logic into the `TerrainGenerator`. I made a bunch of iterations on this, but now have a working solution.
+
+I store the chunks in a HashMap for easy look up based on chunk position. This makes it easy to look up, when doing chunk loading.
+
+I've made a `ChunkManager` component, that handles the loading and unloading of chunks. It takes the players position, and calculates the currenct chunk the player is in, and then enables surrounding chunks based on render distance (defined in chunks).
+
+To optimize this I only check when the player has moved half a chunk size.
+
+**_Ore Veins and Perlin Noise_**
+To make more predictable ore spawning, I wanted to make ore veins. To decide where to place these veins I generate a perlin noise map for each chunk. I then use this map to decide where to place the ore veins.
+
+I then randomly choose an ore type to place in the vein, and then place the ore in the terrain.
+
+To make sure I don't place rocks on the same position twice, which can happen since veins are randomly sized, I keep a list of positions that have been used. If the position is already in the list, I skip it.
+
+The random vein positions are clamped by the chunk size, so veins are cut off if they hit a chunk border. Minecraft does this as well, and I think it looks good, and it's a relatively simple solution.
+
+## Work Session 10 + 11
+
+**_Migrating to ScriptableObjects and other Refactors_**
+After watching talks and videoes abotu ScriptableObjects, I have decieded to stop using enums for the RockTypes and ItemTypes, and instead use ScriptableObjects.
+
+It felt more in the spirit of Unity, more flexible and performant. And honestly just wanted to try it out. And I think it's a good idea to learn how to use them, since they are so powerful.
+
+I've made a `Inventory` ScriptableObject, which contains a `Dictionary` of `Item` and `int`. This is the same as the `PlayerInventory` component, but now it's a ScriptableObject.
+
+I've made the `Pickupable` component into a `Collectible` component, which takes a `Item` ScriptableObject as a parameter, and has a `Collect` method, which destroys the object and calls an event.
+
+In addition to this I made a `Collector` component, which looks for collisions with the `Collectible` component, and adds the item to an `Inventory`, if an `Inventory` is given in the inspector.
+
+I like this separation of concerns, and I think it makes the code more readable and maintainable.
+
+**_Making it pretty_**
+
+I have found some assets for free on the internet that I can use for my rocks and ores.
+
+I want the rocks that have no adjacent rocks to use a different sprite. This means that the rocks have to know if there are rocks adjacent, so they can update their sprite accordingly.
+
+Since the rocks use world position, and have a size of 1, I can simply use a `HasRockAt` method on the `Terrain`, which takes a position, and returns a boolean if there is a rock at that position.
+
+```cs
+bool isRockAbove = Terrain.HasRockAt(transform.position + Vector3.up);
+bool isRockBelow = Terrain.HasRockAt(transform.position + Vector3.down);
+bool isRockLeft = Terrain.HasRockAt(transform.position + Vector3.left);
+bool isRockRight = Terrain.HasRockAt(transform.position + Vector3.right);
+```
+
+To know when to update this sprite, I have a `OnRockRemoved` event on the `Terrain` class, which is called when a rock is removed. This event is called in the `RemoveRock` method, which is called when a rock is destroyed.
+
+Since there is a lot of rocks enabled at the same time I wanted to optimize this, so I only update rocks adjacent to the removed rock.
+
+Since I know the position of the removed rock, I can calculate the distance from the rock being updated to the removed rock. If this is over 1, it's not adjacent, and I can skip updating the sprite.
+
+```cs
+float distance = Vector2.Distance(removedRockPosition, transform.position);
+if (distance > 1f)
+{
+    return;
+}
+```
+
+## Work Session 12
+
+I have made a Shader and Material that adds a randomly generated cracking texture on top of the rock textures, based on the health of the rock. This gives the player a visual indication of the health of the rock.

@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
@@ -6,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class RockController : MonoBehaviour
 {
-    private SpriteRenderer sprite;
+    public Rock Rock;
+    private SpriteRenderer spriteRenderer;
     private Health health;
     private Mineable mineable;
 
@@ -14,38 +14,67 @@ public class RockController : MonoBehaviour
     {
         health = GetComponent<Health>();
         mineable = GetComponent<Mineable>();
-        sprite = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Start()
     {
-        SetColor(mineable.RockType.StartColor);
+        mineable.DropItem = Rock.DropItem;
+        mineable.DropAmount = Rock.DropAmount;
+
+        health.SetMaxHealth(Rock.MaxHealth);
+
+        spriteRenderer.sprite = Rock.Sprite;
+
+        Terrain.OnRockChangedEvent += UpdateRockSprite;
+        UpdateRockSprite(transform.position);
     }
 
     void OnEnable()
     {
-        if (health) health.OnDamageEvent += OnDamage;
+        Terrain.OnRockChangedEvent += UpdateRockSprite;
+
+        health.OnDamageEvent += OnDamage;
+        health.OnDeathEvent += OnDeath;
     }
 
     void OnDisable()
     {
-        if (health) health.OnDamageEvent -= OnDamage;
+        Terrain.OnRockChangedEvent -= UpdateRockSprite;
+
+        health.OnDamageEvent -= OnDamage;
+        health.OnDeathEvent -= OnDeath;
     }
 
     public void OnDamage(int damage)
     {
-        Color newColor = Color.Lerp(
-            mineable.RockType.StartColor,
-            mineable.RockType.EndColor,
-            1f - (float)health.CurrentHealth / health.MaxHealth
-        );
-
-        SetColor(newColor);
+        UpdateCrackingMaterial();
     }
 
-    public void SetColor(Color color)
+    private void OnDeath()
     {
-        sprite.color = color;
-        sprite.material.color = color;
+        Terrain.RemoveRock(transform.position);
+    }
+
+    private void UpdateCrackingMaterial()
+    {
+        spriteRenderer.material.SetFloat(
+            "_Percentage",
+            1 - health.GetHealthPercentage()
+        );
+    }
+
+    private void UpdateRockSprite(Vector2 changedRockPos)
+    {
+        if (
+            destroyCancellationToken.IsCancellationRequested ||
+            Rock.SpriteHandler == null ||
+            Vector2.Distance(transform.position, changedRockPos) > 1f
+        )
+        {
+            return;
+        }
+
+        spriteRenderer.sprite = Rock.SpriteHandler.GetRockSprite(transform.position);
     }
 }

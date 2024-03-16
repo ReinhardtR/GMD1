@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Health))]
 public class Mineable : MonoBehaviour
 {
-    public RockType RockType { get; set; }
+    public Item DropItem { get; set; }
     public int DropAmount { get; set; } = 1;
 
     private Health health;
@@ -18,12 +18,14 @@ public class Mineable : MonoBehaviour
     void OnEnable()
     {
         health.OnDeathEvent += OnDeath;
-        if (RockType != null) health.MaxHealth = RockType.MaxHealth;
     }
 
     void OnDisable()
     {
-        if (health) health.OnDeathEvent -= OnDeath;
+        if (health)
+        {
+            health.OnDeathEvent -= OnDeath;
+        }
     }
 
     public void TakeDamage(int damage)
@@ -35,9 +37,9 @@ public class Mineable : MonoBehaviour
 
     private void OnDeath()
     {
-        if (RockType.DropItem != null)
+        if (DropItem != null)
         {
-            ItemSpawner.SpawnItem(RockType.DropItem, transform.position, DropAmount);
+            ItemSpawner.SpawnItem(DropItem, transform.position, DropAmount);
         }
 
         Destroy(gameObject);

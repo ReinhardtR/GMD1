@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7707d97a43a0b48dfbd3989741820c19, type: 3}
+  m_Name: Diamond
+  m_EditorClassIdentifier: 
+  Name: Diamond
+  MaxHealth: 500
+  SpawnChance: 0.01
+  DropAmount: 1
+  DropItem: {fileID: 11400000, guid: 53d5fcf428b70407bb32ab4d5782aea6, type: 2}
+  StartColor: {r: 0.4481132, g: 0.8343373, b: 1, a: 1}
+  EndColor: {r: 0, g: 0.17640331, b: 0.4245283, a: 1}
