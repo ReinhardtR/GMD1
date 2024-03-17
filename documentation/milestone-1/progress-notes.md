@@ -282,4 +282,6 @@ To summarize what I've added to the game:
 
 ![Inventory and Items](images/inventory-and-items.png)
 
-![gameplay](images/gameplay.webm)
+## Gameplay
+
+![Gameplay](images/gameplay.gif)
