@@ -209,3 +209,77 @@ if (distance > 1f)
 ## Work Session 12
 
 I have made a Shader and Material that adds a randomly generated cracking texture on top of the rock textures, based on the health of the rock. This gives the player a visual indication of the health of the rock.
+
+# Reflections
+
+I'm happy with the progress I've made so far. I've learned a lot about Unity, and I've made a lot of progress on the game. I wouldn't say I'm 100% done with the first milestone, as I would like to refine the code structure and make it more maintainable. I would also like to add more sprites and effects to the game, to make it more visually appealing.
+
+I've spent a significant amount of time refactoring and rethinking the architecture of the code, and how to best utilize Unity's features. I think it's a good time investment to learn at the start of the project, as it will make the project easier to maintain and expand in the future.
+
+I now have a better intuition for how to structure my code, and what Unity has to offer, which I believe will make the next milestone faster to complete. And maybe even leave some time to polish this milestone.
+
+To summarize what I've added to the game:
+
+## Player
+
+- The player can rotate in 8 directions, and can "boost" in the current direction to move.
+
+### Laser
+
+- The player can fire a laser to mine rocks.
+- The laser can hit multiple rocks at once.
+- The laser has a range and a fire rate.
+
+### Inventory
+
+- The player has an inventory, which can store items.
+
+## Terrain
+
+### Rocks
+
+- Rocks have health and can be destroyed.
+- Rocks have a different sprite based on amount of adjacent rocks.
+- Rocks have a cracking effect based on health.
+- Rocks can drop items when destroyed. (Ores)
+
+### Generation
+
+- The terrain is generated in chunks, to allow chunk loading and unloading.
+- The terrain is generated with a perlin noise map, to allow for predictable ore veins.
+
+### Chunk Manager
+
+- The chunk manager loads and unloads chunks based on the players position.
+
+## Items
+
+- Items can be picked up and added to the players inventory.
+
+## UI
+
+- The player has a UI to show the items in their inventory.
+
+# Showcase
+
+## Shader Graph for Cracking Effect
+
+![Shader Graph for Cracking Effect](images/shader-graph.png)
+
+## Chunk Loading
+
+![Chunk Loading](images/chunk-loading.png)
+
+## Cracking Effect
+
+![Cracking Effect](images/cracking-effect.png)
+
+## Rock Sprites based on Adjacent Rocks
+
+![Rock Sprites based on Adjacent Rocks](images/rock-sprites.png)
+
+## Inventory and Items
+
+![Inventory and Items](images/inventory-and-items.png)
+
+![gameplay](images/gameplay.mp4)
