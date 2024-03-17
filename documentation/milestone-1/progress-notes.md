@@ -284,4 +284,6 @@ To summarize what I've added to the game:
 
 ## Gameplay
 
+> There is some slight lag and weird visual artifacts because it's a GIF, but the game runs smoothly in the Unity Editor.
+
 ![Gameplay](images/gameplay.gif)
