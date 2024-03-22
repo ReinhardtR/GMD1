@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 2262981318867114695}
   - component: {fileID: 8376339835528972967}
   - component: {fileID: 7358316434756837513}
-  - component: {fileID: 8207507647584404274}
   - component: {fileID: 7448284037171913956}
+  - component: {fileID: -2390862596055093970}
   m_Layer: 0
   m_Name: Rock
-  m_TagString: Untagged
+  m_TagString: Mineable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,18 +147,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 0
   CurrentHealth: 0
---- !u!114 &8207507647584404274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613107539381618728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e84057f862d84c7a9ca2c340dbcdca4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7448284037171913956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,3 +160,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rock: {fileID: 11400000, guid: 3596800d454fc49eb935fdd97e55dfd0, type: 2}
+--- !u!114 &-2390862596055093970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613107539381618728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a537da112ac4d3ab421d2ffac07253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Item: {fileID: 0}
+  Amount: 0

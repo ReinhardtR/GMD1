@@ -46,7 +46,7 @@ public class ChunkManager : MonoBehaviour
             foreach (int y in yRange)
             {
                 Vector2 chunkCoords = new(x, y);
-                GameObject chunk = Terrain.GetChunk(chunkCoords);
+                GameObject chunk = generator.Terrain.GetChunk(chunkCoords);
 
                 if (chunk == null)
                 {

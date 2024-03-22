@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
@@ -27,6 +26,9 @@ public class TerrainGenerator : MonoBehaviour
     [Tooltip("Threshold for spawning veins of ores."), Range(0f, 1f)]
     public float VeinThreshold = 0.5f;
 
+    [Header("Testing")]
+    public TerrainData Terrain;
+
     void Awake()
     {
         if (Seed <= 0)
@@ -35,6 +37,11 @@ public class TerrainGenerator : MonoBehaviour
         }
 
         Random.InitState(Seed);
+
+        if (Terrain == null)
+        {
+            Terrain = ScriptableObject.CreateInstance<TerrainData>();
+        }
     }
 
     public GameObject GenerateChunk(Vector2 chunkCoords)
@@ -115,7 +122,15 @@ public class TerrainGenerator : MonoBehaviour
         rockObject.SetActive(false);
 
         RockController rockController = rockObject.GetComponent<RockController>();
+        rockController.Terrain = Terrain;
         rockController.Rock = rock;
+
+        if (rock.DropItem && rock.DropAmount > 0)
+        {
+            DropsItem dropsItem = rockObject.GetComponent<DropsItem>();
+            dropsItem.Item = rock.DropItem;
+            dropsItem.Amount = rock.DropAmount;
+        }
 
         rockObject.SetActive(true);
 

@@ -100,15 +100,14 @@ public class LaserDrillController : MonoBehaviour
                 farthestDistance = distanceToCollider;
             }
 
-            if (isOnCooldown)
+            if (isOnCooldown || !hit.collider.CompareTag("Mineable"))
             {
                 continue;
             }
 
-            Mineable mineable = hit.collider.gameObject.GetComponent<Mineable>();
-            if (mineable)
+            if (hit.collider.TryGetComponent(out Health health))
             {
-                mineable.TakeDamage(damage);
+                health.TakeDamage(damage);
                 lastFireTime = Time.time;
             }
         }
