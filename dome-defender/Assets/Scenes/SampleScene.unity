@@ -446,8 +446,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21c457dcce7a14575b4c0aa77b4e87b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Camera: {fileID: 519420028}
   Player: {fileID: 1147302733}
-  RenderDistance: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,7 +598,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8dfff70398bd4ee1a0a67c44aefbc5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1147302736}
+  Player: {fileID: 1147302733}
+  Tower: {fileID: 819904311}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +694,7 @@ GameObject:
   - component: {fileID: 727768251}
   - component: {fileID: 727768256}
   - component: {fileID: 727768255}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LaserDrill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -889,6 +890,68 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!1001 &785737572
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4495040471574069071, guid: 004cd9ec555f0488ba78c63b2743bb75, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495040471574069071, guid: 004cd9ec555f0488ba78c63b2743bb75, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495040471574069071, guid: 004cd9ec555f0488ba78c63b2743bb75, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495040471574069071, guid: 004cd9ec555f0488ba78c63b2743bb75, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495040471574069071, guid: 004cd9ec555f0488ba78c63b2743bb75, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495040471574069071, guid: 004cd9ec555f0488ba78c63b2743bb75, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495040471574069071, guid: 004cd9ec555f0488ba78c63b2743bb75, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495040471574069071, guid: 004cd9ec555f0488ba78c63b2743bb75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495040471574069071, guid: 004cd9ec555f0488ba78c63b2743bb75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495040471574069071, guid: 004cd9ec555f0488ba78c63b2743bb75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028111540352206610, guid: 004cd9ec555f0488ba78c63b2743bb75, type: 3}
+      propertyPath: m_Name
+      value: Tower
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 004cd9ec555f0488ba78c63b2743bb75, type: 3}
+--- !u!1 &819904311 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5028111540352206610, guid: 004cd9ec555f0488ba78c63b2743bb75, type: 3}
+  m_PrefabInstance: {fileID: 785737572}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &939017706
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +1034,7 @@ GameObject:
   - component: {fileID: 1147302737}
   - component: {fileID: 1147302734}
   - component: {fileID: 1147302739}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1142,7 +1205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1343557420}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1220,3 +1283,4 @@ SceneRoots:
   - {fileID: 64356505}
   - {fileID: 939017709}
   - {fileID: 2026760506}
+  - {fileID: 785737572}

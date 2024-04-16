@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class ChunkManager : MonoBehaviour
 {
+    public GameObject Camera;
     public GameObject Player;
     [Tooltip("The amount of chunks to render around the player.")]
-    public int RenderDistance = 3;
 
+    private Camera playerCamera;
+    private int renderDistance;
     private TerrainGenerator generator;
     private Vector2 lastPlayerPos;
     private HashSet<GameObject> activeChunks;
@@ -15,22 +17,34 @@ public class ChunkManager : MonoBehaviour
     void Awake()
     {
         generator = GetComponent<TerrainGenerator>();
+        playerCamera = Camera.GetComponent<Camera>();
     }
 
     void Start()
     {
         activeChunks = new();
         lastPlayerPos = Player.transform.position;
+        UpdateRenderDistance();
         ManageChunks();
     }
 
     void Update()
     {
-        if (Vector2.Distance(Player.transform.position, lastPlayerPos) >= generator.ChunkSize / 4)
+        bool hasRenderDistanceChanged = UpdateRenderDistance();
+        if (Vector2.Distance(Player.transform.position, lastPlayerPos) >= generator.ChunkSize / 4 || hasRenderDistanceChanged)
         {
             lastPlayerPos = Player.transform.position;
             ManageChunks();
         }
+    }
+
+    private bool UpdateRenderDistance()
+    {
+        float prev = renderDistance;
+
+        renderDistance = Mathf.CeilToInt(playerCamera.orthographicSize * 2 / generator.ChunkSize);
+
+        return prev != renderDistance;
     }
 
     private void ManageChunks()
@@ -40,7 +54,7 @@ public class ChunkManager : MonoBehaviour
             ToggleChunk(activeChunks.ElementAt(i));
         }
 
-        (IEnumerable<int> xRange, IEnumerable<int> yRange) = GetChunkRanges(RenderDistance);
+        (IEnumerable<int> xRange, IEnumerable<int> yRange) = GetChunkRanges(renderDistance);
         foreach (int x in xRange)
         {
             foreach (int y in yRange)
@@ -63,7 +77,7 @@ public class ChunkManager : MonoBehaviour
     private void ToggleChunk(GameObject chunk)
     {
         float distanceToChunk = GetShortestDistanceToChunk(chunk);
-        bool inRenderDistance = distanceToChunk <= generator.ChunkSize * RenderDistance;
+        bool inRenderDistance = distanceToChunk <= generator.ChunkSize * renderDistance;
 
         if (inRenderDistance)
         {

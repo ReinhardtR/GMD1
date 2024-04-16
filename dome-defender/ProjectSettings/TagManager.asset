@@ -5,14 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - Mineable
+  - Tower
+  - TowerControlCenter
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - Tower
   - 
   - 
   - 

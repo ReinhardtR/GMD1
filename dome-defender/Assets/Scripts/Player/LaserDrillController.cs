@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class LaserDrillController : MonoBehaviour
 {
+    public bool isFiring { get; private set; }
+
     [SerializeField]
     private int damage = 15;
     [SerializeField]
@@ -27,6 +29,7 @@ public class LaserDrillController : MonoBehaviour
         laser.startWidth = width;
         laser.endWidth = width;
         laser.enabled = false;
+        isFiring = false;
 
         lastFireTime = 0;
     }
@@ -39,10 +42,12 @@ public class LaserDrillController : MonoBehaviour
     public void StartDrill()
     {
         laser.enabled = true;
+        isFiring = true;
     }
     public void StopDrill()
     {
         laser.enabled = false;
+        isFiring = false;
     }
 
     public void Rotate(Vector2 direction)
