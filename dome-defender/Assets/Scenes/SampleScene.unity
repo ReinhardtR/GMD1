@@ -419,6 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RockPrefab: {fileID: 613107539381618728, guid: 17d5202c7a0414132a66d27c715d0252, type: 3}
+  BedrockPrefab: {fileID: 613107539381618728, guid: b78007e9ef3ce483e8f37802b971dcec, type: 3}
   Stone: {fileID: 11400000, guid: 3596800d454fc49eb935fdd97e55dfd0, type: 2}
   Ores:
   - {fileID: 11400000, guid: d4b508582843240c1af00062c0c8180d, type: 2}
@@ -429,7 +430,7 @@ MonoBehaviour:
   LeftBedrockX: -8
   RightBedrockX: 8
   BottomBedrockY: -17
-  StartY: -1
+  TopBedrockY: -1
   Seed: 0
   NoiseScale: 0.15
   VeinThreshold: 0.5

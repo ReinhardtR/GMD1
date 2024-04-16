@@ -125,8 +125,8 @@ public class ChunkManager : MonoBehaviour
         // Get the range of chunks to render
         int minX = Mathf.Clamp(playerX - distance, generator.LeftBedrockX, generator.RightBedrockX);
         int maxX = Mathf.Clamp(playerX + distance, generator.LeftBedrockX, generator.RightBedrockX);
-        int minY = Mathf.Clamp(playerY - distance, generator.BottomBedrockY, generator.StartY);
-        int maxY = Mathf.Clamp(playerY + distance, generator.BottomBedrockY, generator.StartY);
+        int minY = Mathf.Clamp(playerY - distance, generator.BottomBedrockY, generator.TopBedrockY);
+        int maxY = Mathf.Clamp(playerY + distance, generator.BottomBedrockY, generator.TopBedrockY);
 
         IEnumerable<int> xRange = Enumerable.Range(minX, maxX - minX + 1);
         IEnumerable<int> yRange = Enumerable.Range(minY, maxY - minY + 1);

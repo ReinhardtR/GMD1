@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -30,11 +29,13 @@ public class PlayerController : MonoBehaviour
     {
         CheckForTowerInteraction();
         CheckForDrillFiring();
+        CheckForTowerFiring();
     }
 
     void FixedUpdate()
     {
         UpdatePlayerMovement();
+        UpdateTowerWeaponMovement();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdatePlayerMovement()
     {
-        if (towerController != null)
+        if (IsControllingTower)
         {
             if (rb.velocity != Vector2.zero)
             {
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForDrillFiring()
     {
-        if (towerController != null)
+        if (IsControllingTower)
         {
             if (drill.isFiring)
             {
@@ -101,6 +102,37 @@ public class PlayerController : MonoBehaviour
         else if (drill.isFiring)
         {
             drill.StopDrill();
+        }
+    }
+
+    private void UpdateTowerWeaponMovement()
+    {
+        if (!IsControllingTower)
+        {
+            return;
+        }
+
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        if (horizontal > 0)
+        {
+            towerController.MoveWeaponRight();
+        }
+        else if (horizontal < 0)
+        {
+            towerController.MoveWeaponLeft();
+        }
+    }
+
+    private void CheckForTowerFiring()
+    {
+        if (!IsControllingTower)
+        {
+            return;
+        }
+
+        if (Input.GetButton("Primary"))
+        {
+            towerController.FireWeapon();
         }
     }
 

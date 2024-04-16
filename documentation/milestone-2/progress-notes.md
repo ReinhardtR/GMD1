@@ -23,3 +23,15 @@ I made a control center (also just a circle), that the player can walk into and 
 This will disable normal player movement, and instead control the tower.
 
 I made the camera lock to the tower and zoom out, to give the player a better overview of the enemies when defending.
+
+**_Thoughts_**
+
+I currently have tower and player input interactions in the PlayerController. I would like a better solution for this where the input interactions are split out in its own classes. But for now I will stick to this since there is more important features to implement.
+
+I also think my player, camera and tower is coupled too much. I would like to decouple them with ScriptableObject variables, that the components can listen to changes on.
+
+**_Bedrock_**
+
+I made a bedrock layer around the edges of the terrain to stop the player from moving out of the terrain boundaries.
+
+I remove prevent the generator from placing bedrock right under the base, so the player has an "entrance" to the ground.

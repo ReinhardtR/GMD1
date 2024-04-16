@@ -5,6 +5,8 @@ public class TerrainGenerator : MonoBehaviour
 {
     [Tooltip("The prefab to use for the rocks.")]
     public GameObject RockPrefab;
+    [Tooltip("The prefab to use for the bedrock.")]
+    public GameObject BedrockPrefab;
 
     [Header("Rocks")]
     public Rock Stone;
@@ -16,7 +18,7 @@ public class TerrainGenerator : MonoBehaviour
     public int LeftBedrockX = -8;
     public int RightBedrockX = 8;
     public int BottomBedrockY = -17;
-    public int StartY = -1;
+    public int TopBedrockY = -1;
 
     [Header("Noise Settings")]
     [Tooltip("The seed to use for random generation. If 0, a random seed will be used.")]
@@ -53,7 +55,7 @@ public class TerrainGenerator : MonoBehaviour
 
         if (
             chunkCoords.x < LeftBedrockX || chunkCoords.x > RightBedrockX ||
-            chunkCoords.y > StartY || chunkCoords.y < BottomBedrockY
+            chunkCoords.y > TopBedrockY || chunkCoords.y < BottomBedrockY
         )
         {
             throw new System.Exception("Chunk is out of bounds!");
@@ -77,9 +79,14 @@ public class TerrainGenerator : MonoBehaviour
         {
             for (int y = 0; y < ChunkSize; y++)
             {
-                Rock rock = GetRandomRockType();
                 Vector2 position = new(x, y);
+                if (IsBedrockPosition(chunkCoords, position))
+                {
+                    PlaceBedrock(chunk, position);
+                    continue;
+                }
 
+                Rock rock = GetRandomRockType();
                 if (noiseMap[x, y] >= VeinThreshold && rock != Stone)
                 {
                     PlaceOresInVein(chunk, rock, position);
@@ -108,6 +115,11 @@ public class TerrainGenerator : MonoBehaviour
 
             PlaceRock(chunk, rock, new(oreX, oreY));
         }
+    }
+
+    private void PlaceBedrock(Transform chunk, Vector2 position)
+    {
+        Instantiate(BedrockPrefab, (Vector2)chunk.position + position, Quaternion.identity, chunk);
     }
 
     private void PlaceRock(Transform chunk, Rock rock, Vector2 position)
@@ -167,5 +179,33 @@ public class TerrainGenerator : MonoBehaviour
         }
 
         return Stone;
+    }
+
+    private bool IsBedrockPosition(Vector2 chunkCoords, Vector2 rockPos)
+    {
+        // Ground opening
+        if (chunkCoords.y == TopBedrockY)
+        {
+            if (chunkCoords.x == -1)
+            {
+                if (rockPos.x == ChunkSize - 1)
+                {
+                    return false;
+                }
+            }
+            else if (chunkCoords.x == 0)
+            {
+                if (rockPos.x == 0 || rockPos.x == 1)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return
+            (chunkCoords.x == LeftBedrockX && rockPos.x == 0) ||
+            (chunkCoords.x == RightBedrockX && rockPos.x == ChunkSize - 1) ||
+            (chunkCoords.y == BottomBedrockY && rockPos.y == 0) ||
+            (chunkCoords.y == TopBedrockY && rockPos.y == ChunkSize - 1);
     }
 }
