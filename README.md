@@ -8,36 +8,43 @@
 
 [Design Document](documentation/design-document/content.md)
 
-**Milestones**
+[Milestone 1](documentation/milestone-1/content.md)
 
-- [Milestone 1](documentation/milestone-1/content.md)
-- [Milestone 2](documentation/milestone-2/content.md)
-- [Milestone 3](documentation/milestone-3/content.md)
+[Milestone 2](documentation/milestone-2/content.md)
+
+[Milestone 3](documentation/milestone-3/content.md)
 
 [Showcase and Reflections](documentation/showcase/content.md)
 
 ### Tutorials Used
 
 **Unity Input System**
-https://www.youtube.com/watch?v=5tOOstXaIKE
+
+- https://www.youtube.com/watch?v=5tOOstXaIKE
 
 **2D Lasers using Line Renderer in Unity**
-https://www.youtube.com/watch?v=S6eRVwAtfOM
+
+- https://www.youtube.com/watch?v=S6eRVwAtfOM
 
 **Wave System**
-https://www.youtube.com/watch?v=Vrld13ypX_I
+
+- https://www.youtube.com/watch?v=Vrld13ypX_I
 
 **Audio Manager**
-https://www.youtube.com/watch?v=6OT43pvUyfY
+
+- https://www.youtube.com/watch?v=6OT43pvUyfY
 
 ### Assets Used
 
 **Music**
-https://gooseninja.itch.io/space-music-pack
+
+- https://gooseninja.itch.io/space-music-pack
 
 **SFX**
-https://kronbits.itch.io/freesfx?download
+
+- https://kronbits.itch.io/freesfx?download
 
 **Sprites**
-https://ansimuz.itch.io/warped-shooting-fx
-https://monopixelart.itch.io/golems-pack
+
+- https://ansimuz.itch.io/warped-shooting-fx
+- https://monopixelart.itch.io/golems-pack
