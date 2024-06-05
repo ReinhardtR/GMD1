@@ -3,7 +3,6 @@
 [Play the WebGL Build](https://reinhardtr.github.io/GMD1/)
 
 [Video Showcase](https://drive.google.com/file/d/1fdbuocLur69IDSdwhgXbYlj0N-TTs2_Q/view?usp=sharing)
-<video src="https://drive.google.com/file/d/1fdbuocLur69IDSdwhgXbYlj0N-TTs2_Q/view?usp=sharing">
 
 ## Blog Posts
 
