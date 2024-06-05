@@ -8,9 +8,11 @@
 
 [Design Document](documentation/design-document/content.md)
 
-[Milestone 1](documentation/milestone-1/content.md)
-[Milestone 2](documentation/milestone-2/content.md)
-[Milestone 3](documentation/milestone-3/content.md)
+**Milestones**
+
+- [Milestone 1](documentation/milestone-1/content.md)
+- [Milestone 2](documentation/milestone-2/content.md)
+- [Milestone 3](documentation/milestone-3/content.md)
 
 [Showcase and Reflections](documentation/showcase/content.md)
 
