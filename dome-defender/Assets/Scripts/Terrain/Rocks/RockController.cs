@@ -21,7 +21,6 @@ public class RockController : MonoBehaviour
 
         spriteRenderer.sprite = Rock.Sprite;
 
-        Terrain.OnRockChangedEvent += UpdateRockSprite;
         UpdateRockSprite(transform.position);
     }
 

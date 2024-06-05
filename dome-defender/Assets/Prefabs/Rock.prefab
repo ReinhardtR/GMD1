@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7358316434756837513}
   - component: {fileID: 7448284037171913956}
   - component: {fileID: -2390862596055093970}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rock
   m_TagString: Mineable
   m_Icon: {fileID: 0}
@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2042f0bd7ef433da79a863ca60838f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Terrain: {fileID: 0}
   Rock: {fileID: 11400000, guid: 3596800d454fc49eb935fdd97e55dfd0, type: 2}
 --- !u!114 &-2390862596055093970
 MonoBehaviour:

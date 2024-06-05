@@ -101,7 +101,7 @@ public class TerrainGenerator : MonoBehaviour
 
     private void PlaceOresInVein(Transform chunk, Rock rock, Vector2 position)
     {
-        // Determine number of ores in the vein (adjust as needed)
+        // Determine number of ores in the vein
         int veinSize = Random.Range(2, 5);
         for (int k = 0; k < veinSize; k++)
         {

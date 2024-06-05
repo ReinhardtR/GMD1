@@ -160,8 +160,6 @@ The _Primary_ button will **shoot mining lasers**, when not controlling the base
 
 The _Primary_ button will **shoot weapons**, when controlling the base.
 
-The _Primary_ button will **buy upgrades** when in the Upgrades Menu.
-
 **_Boost_**
 The _Boost_ button will make the player **move with a jetpack**, when not controlling the base or in a menu.
 
@@ -171,6 +169,9 @@ The _Joystick_ will **rotate the player** when not controlling the base or in a 
 The _Joystick_ will **move the base weapons**, when controlling the base.
 
 The _Joystick_ will **navigate the menus**, when in the menus.
+
+**_Submit_**
+The _Submit_ button will **click** on button in the menus. e.g.: buying upgrades in the Upgrades Menu.
 
 #### Emotions
 
@@ -201,32 +202,31 @@ The player will feel a sense of fear when they are defending the base from the w
 
 **1. Movement and Mining System**
 
-- Player Movement
-- Laser Controlling
-- Laser Mining
-- Terrain Generation
-- Chunk Loading
-- Resource Spawning
-- Item Collection
-- Inventory System
+- [x] Player Movement
+- [x] Laser Controlling
+- [x] Laser Mining
+- [x] Terrain Generation
+- [x] Chunk Loading
+- [x] Resource Spawning
+- [x] Item Collection
+- [x] Inventory System
 
 **2. Base and Enemies System**
 
-- Base Health
-- Base Weapons
-- Base Weapon Controlling
-- Base Weapon Shooting
-- Enemy Spawning
-- Enemy Movement
-- Enemy Health
-- Wave System
+- [x] Base Health
+- [x] Base Weapon
+- [x] Base Weapon Controlling
+- [x] Base Weapon Shooting
+- [x] Enemy Spawning
+- [x] Enemy Movement
+- [x] Enemy Health
+- [x] Wave System
 
 **3. Upgrades System**
 
-- Upgrades Menu (UI)
-- Upgrades Buying (Spending resources)
-- Upgrades Applying
-  -- Base Upgrades (Shield & Weapons)
-  -- Mining Upgrades (Movement & Lasers)
+- [x] Upgrades Menu (UI)
+- [x] Upgrades Buying (Spending resources)
+- [x] Base Upgrades (Shield & Weapons)
+- [ ] Mining Upgrades (Movement & Lasers)
 
 ---

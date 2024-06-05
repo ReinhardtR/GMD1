@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdatePlayerMovement()
     {
-        if (IsControllingTower)
+        if (IsControllingTower || GUIManager.Instance.IsPopupActive())
         {
             if (rb.velocity != Vector2.zero)
             {
@@ -87,7 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         if (IsControllingTower)
         {
-            if (drill.isFiring)
+            if (drill.IsFiring)
             {
                 drill.StopDrill();
             }
@@ -99,7 +100,7 @@ public class PlayerController : MonoBehaviour
         {
             drill.StartDrill();
         }
-        else if (drill.isFiring)
+        else if (drill.IsFiring)
         {
             drill.StopDrill();
         }

@@ -8,10 +8,10 @@ public class CameraController : MonoBehaviour
     private PlayerController playerController;
 
     private float leaveTowerControlTimer;
-    private float smoothTransitionDuration = 0.2f;
+    private readonly float smoothTransitionDuration = 0.2f;
 
-    private float towerCameraSize = 6f;
-    private float playerCameraSize = 4f;
+    private readonly float towerCameraSize = 10f;
+    private readonly float playerCameraSize = 4f;
 
     void Awake()
     {

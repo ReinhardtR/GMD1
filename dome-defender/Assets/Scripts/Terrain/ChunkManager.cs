@@ -6,7 +6,8 @@ public class ChunkManager : MonoBehaviour
 {
     public GameObject Camera;
     public GameObject Player;
-    [Tooltip("The amount of chunks to render around the player.")]
+    [Tooltip("These chunks will always be loaded.")]
+    public Vector2[] spawnChunks;
 
     private Camera playerCamera;
     private int renderDistance;
@@ -24,6 +25,7 @@ public class ChunkManager : MonoBehaviour
     {
         activeChunks = new();
         lastPlayerPos = Player.transform.position;
+        ActivateSpawnChunks();
         UpdateRenderDistance();
         ManageChunks();
     }
@@ -31,7 +33,8 @@ public class ChunkManager : MonoBehaviour
     void Update()
     {
         bool hasRenderDistanceChanged = UpdateRenderDistance();
-        if (Vector2.Distance(Player.transform.position, lastPlayerPos) >= generator.ChunkSize / 4 || hasRenderDistanceChanged)
+        bool hasMovedConsiderably = Vector2.Distance(Player.transform.position, lastPlayerPos) >= generator.ChunkSize / 4;
+        if (hasMovedConsiderably || hasRenderDistanceChanged)
         {
             lastPlayerPos = Player.transform.position;
             ManageChunks();
@@ -49,11 +52,13 @@ public class ChunkManager : MonoBehaviour
 
     private void ManageChunks()
     {
+        // Toogle chunks that are no longer in the render distance
         for (int i = activeChunks.Count - 1; i >= 0; i--)
         {
             ToggleChunk(activeChunks.ElementAt(i));
         }
 
+        // Procedurally generate or activate chunks in the render distance
         (IEnumerable<int> xRange, IEnumerable<int> yRange) = GetChunkRanges(renderDistance);
         foreach (int x in xRange)
         {
@@ -74,8 +79,29 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
+    private void ActivateSpawnChunks()
+    {
+        foreach (Vector2 chunkCoords in spawnChunks)
+        {
+            GameObject chunk = generator.Terrain.GetChunk(chunkCoords);
+
+            if (chunk == null)
+            {
+                chunk = generator.GenerateChunk(chunkCoords);
+            }
+
+            ActivateChunk(chunk);
+        }
+    }
+
+
     private void ToggleChunk(GameObject chunk)
     {
+        if (spawnChunks.Contains(chunk.transform.position / generator.ChunkSize))
+        {
+            return;
+        }
+
         float distanceToChunk = GetShortestDistanceToChunk(chunk);
         bool inRenderDistance = distanceToChunk <= generator.ChunkSize * renderDistance;
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5559513051843188778}
   - component: {fileID: 2262981318867114695}
   - component: {fileID: 8376339835528972967}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bedrock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
